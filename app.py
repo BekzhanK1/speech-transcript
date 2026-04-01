@@ -29,7 +29,7 @@ with st.sidebar:
 
 uploaded_files = st.file_uploader(
     "Выберите один или несколько аудиофайлов",
-    type=["mp3", "wav", "m4a", "mp4"],
+    type=["mp3", "wav", "m4a", "mp4", "ogg", "oga"],
     accept_multiple_files=True,
 )
 
