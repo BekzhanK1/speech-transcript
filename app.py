@@ -1,10 +1,12 @@
 import os
+from pathlib import Path
 
 import streamlit as st
 from dotenv import load_dotenv
 from openai import OpenAI
 
-load_dotenv()
+# .env рядом с app.py (не зависит от cwd, откуда вызвали streamlit run)
+load_dotenv(Path(__file__).resolve().parent / ".env")
 
 st.set_page_config(page_title="Whisper Transcriber", page_icon="🎙️")
 
@@ -15,11 +17,13 @@ if "batch" not in st.session_state:
 
 # Боковая панель для настроек
 with st.sidebar:
-    api_key = st.text_input(
-        "Введите OpenAI API Key",
+    env_api_key = (os.getenv("OPENAI_API_KEY") or "").strip()
+    api_key_input = st.text_input(
+        "OpenAI API Key",
         type="password",
-        value=os.getenv("OPENAI_API_KEY"),
+        autocomplete="off",
     )
+    api_key = (api_key_input or "").strip() or env_api_key
     model = st.selectbox("Модель", ["whisper-1"])
     language = st.text_input("Язык (например, 'ru' или 'en')", value="ru")
 
