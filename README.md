@@ -38,15 +38,16 @@ make run
 
 ## Docker
 
-Сборка и запуск:
+Сборка и запуск (ключ из **файла `.env` в корне проекта** на хосте — в образ он не копируется, только подставляется при старте контейнера):
 
 ```bash
 make docker-build
-export OPENAI_API_KEY=sk-...
 make docker-run
 ```
 
-Или в одну команду:
+Файл `.env` должен лежать рядом с `Makefile` и содержать строку `OPENAI_API_KEY=sk-...`.
+
+Без `.env` можно передать ключ явно:
 
 ```bash
 docker run --rm -p 9632:9632 -e OPENAI_API_KEY="sk-..." transcript-whisper
