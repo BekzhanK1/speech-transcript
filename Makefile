@@ -5,4 +5,4 @@ docker-build:
 	docker build -t transcript-whisper .
 
 docker-run:
-	docker run --rm -p 9632:9632 transcript-whisper
+	docker run --rm -p 9632:9632 --env-file .env transcript-whisper
